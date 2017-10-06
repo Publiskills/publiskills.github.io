@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+{% assign posts_list = site.posts | where: "lang",page.lang %}
+{% assign nb_to_skip = page.pos | minus:1 | times:site.nb_posts_per_page %}
+{% assign nb_to_pop = posts_list.size | minus: nb_to_skip | minus: site.nb_posts_per_page %}
+{% assign filtered_posts_list= posts_list | shift: nb_to_skip %}
+{% if nb_to_pop > 0 %}{% assign filtered_posts_list = filtered_posts_list | pop: nb_to_pop %}{% endif %}
+{% if nb_pages > page.pos %}
+    {% capture next_url %}/page{{ site.sub_urls_by_lang[page.lang] }}{{ page.pos | plus:1 }}{% endcapture %}
+{% endif %}
+{% if filtered_posts_list.size > 0 %}
+    <div class="main-content post-list">
+    {% for post in filtered_posts_list %}
+        {% include post_element_display.html post=post %}
+    {% endfor %}
+    </div>
+    {% include pagination_ctrl.html elements=posts_list current_pos=page.pos lang=page.lang %}
+{% else %}
+<script>
+    window.location = "{{site.sub_urls_by_lang[page.lang]}}404.html";
+</script>
+<noscript>
+    <div class="post no-post">
+        {{site.data.translations["no_posts"][page.lang] | capitalize}}
+    </div>
+</noscript>
+{% endif %}

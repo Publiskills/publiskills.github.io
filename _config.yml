@@ -1,0 +1,96 @@
+email: fabien.wirig@publiskills.com
+site_name: Publiskills
+author: Fabien Wirig
+baseurl: ""
+url: "http://publiskills.com"
+
+langs: [fr]
+
+sub_urls_by_lang:
+  fr: /
+  en: /en/
+
+locale:
+  fr: fr_FR
+  en: en_US
+
+logo: logo_small.png
+
+twitter:
+  username: fabienwirig
+  maxpostlength: 140
+  linklength: 23
+github:
+  username: publiskills
+linkedin:
+  username: fabien-wirig-802b3b33
+googleplus:
+  username: 106815879277448801230
+stackoverflow:
+  username: 4979542
+
+disqus:
+  shortname: publiskills-dev
+
+google_analytics: UA-104921842-1
+
+nb_posts_per_page: 5
+words_per_minute: 180
+show_reading_time: true
+show_categories: false
+
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  my_tags:
+    output: true
+    permalink: /tag/:path/
+
+  my_categories:
+    output: true
+    permalink: /category/:path/
+
+  my_pages:
+    output: true
+    permalink: /page/:path/
+
+permalink: /posts/:year/:month/:day/:title/
+
+defaults:
+    - scpe:
+        type: pages
+      values:
+        layoout: page
+        lang: fr
+    - scope:
+        type: posts
+      values:
+        layout: post
+        lang: fr
+    - scope:
+        type: my_tags
+      values:
+        layout: posts_by_tag_or_category
+        lang: fr
+    - scope:
+        type: my_categories
+      values:
+        layout: posts_by_tag_or_category
+        lang: fr
+    - scope:
+        type: my_pages
+      values:
+        layout: posts_by_page
+        lang: fr
+        title: $$site_title$$
+
+exclude: [node_modules, gulpfile.js, package.json, Gemfile, Gemfile.lock]

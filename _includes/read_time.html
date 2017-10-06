@@ -1,0 +1,1 @@
+{% assign readcontent = include.content | default: content %}{% assign readtime = readcontent | strip_html | number_of_words | divided_by:site.words_per_minute %}{% if readtime <= 1 %}1&nbsp;minute{% else %}{{ readtime }}&nbsp;minutes{% endif %}

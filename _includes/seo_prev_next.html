@@ -1,0 +1,18 @@
+{% assign pages_src = site.posts | where: "lang", page.lang %}{% assign nb_pages = pages_src.size | divided_by: site.nb_posts_per_page %}{% assign nb_pages_modulo = pages_src.size | modulo: site.nb_posts_per_page %}{% if nb_pages_modulo > 0 %}{% assign nb_pages = nb_pages | plus: 1 %}{% endif %}
+{% if page.collection == "my_pages" %}
+{% if page.pos > 1 %}
+{% if page.pos == 2 %}
+{% assign previous_url = site.sub_urls_by_lang[page.lang] %}
+{% else %}
+{% capture previous_url %}/page{{ site.sub_urls_by_lang[page.lang] }}{{ page.pos | minus:1 }}{% endcapture %}
+{% endif %}
+<link rel="prev" href="{{previous_url | absolute_url}}" />
+{% endif %}
+{% if page.pos < nb_pages %}
+{% capture next_url %}/page{{ site.sub_urls_by_lang[page.lang] }}{{ page.pos | plus:1 }}{% endcapture %}
+<link rel="next" href="{{next_url | absolute_url}}" />
+{% endif %}
+{% elsif page.ref == "home" and nb_pages > 1 %}
+{% capture next_url %}/page{{ site.sub_urls_by_lang[page.lang] }}2{% endcapture %}
+<link rel="next" href="{{next_url | absolute_url}}" />
+{% endif %}

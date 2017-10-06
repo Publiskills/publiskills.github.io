@@ -1,0 +1,15 @@
+{% if page.lang == "fr" %}
+    {% assign month_key=include.date | date: '%b' | upcase %}
+    {% if include.format=="post_element_display" %}
+        {% capture month_label %}{% case month_key %}{% when "JAN" %}janv{% when "FEB" %}févr{% when "MAR" %}mars{% when "APR" %}avril{% when "MAY" %}mai{% when "JUN" %}juin{% when "JUL" %}juil{% when "AUG" %}août{% when "SEP" %}sept{% when "Oct" %}oct{% when "NOV" %}nov{% when "DEC" %}déc{% endcase %}{% endcapture %}
+        <span>{{ include.date | date: "%d" }}</span><br/>{{month_label}} {{ include.date | date: "%Y" }}
+    {% else %}
+        {% capture month_label %}{% case month_key %}{% when "JAN" %}janvier{% when "FEB" %}février{% when "MAR" %}mars{% when "APR" %}avril{% when "MAY" %}mai{% when "JUN" %}juin{% when "JUL" %}juillet{% when "AUG" %}août{% when "SEP" %}septembre{% when "Oct" %}octobre{% when "NOV" %}novembre{% when "DEC" %}décembre{% endcase %}{% endcapture %}
+        {{ include.date | date: "%-d" }} {{month_label}} {{ include.date | date: "%Y" }}
+    {% endif %}
+{% else %}
+    {% if include.format=="post_element_display" %}{{ include.date | date: '<span>%d</span><br/>%b %Y' }}
+    {% else %}{% assign date_format = site.minima.date_format | default: "%B %-d, %Y" %}{{ include.date | date: date_format }}
+    {% endif %}
+{% endif %}
+

@@ -1,0 +1,16 @@
+<feed xmlns="http://www.w3.org/2005/Atom" {% if page.lang %}xml:lang="{{ page.lang }}"{% endif %}>
+    <generator uri="https://jekyllrb.com/" version="{{ jekyll.version }}">Jekyll</generator>
+    <link href="{{page.url | absolute_url}}" rel="self" type="application/atom+xml"/>
+    <link href="{{site.url}}{% if page.lang %}{{site.sub_urls_by_lang[page.lang]}}{% endif %}" rel="alternate" type="text/html" hreflang="{{ page.lang }}" />
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <id>{{site.url}}</id>
+    <title type="html">{{ site.data.translations["site_title"][page.lang] }}</title>
+    <subtitle>{{site.data.translations["description"][page.lang] | xml_escape }}</subtitle>
+    <author>
+        <name>{% if page.author %}{{ page.author | xml_escape }}{% else %}{{ site.author | xml_escape }}{% endif %}</name>
+    </author>
+    {% assign posts_by_language = site.posts | where: "lang", page.lang | limit: 10 %}
+    {% for post in posts_by_language %}
+        {% include post_element_feed_display.html post=post %}
+    {% endfor %}
+</feed>

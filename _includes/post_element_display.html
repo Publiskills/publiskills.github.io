@@ -1,0 +1,27 @@
+<div class="post{% if include.post.thumbnail %} with-thumbnail{% endif %}">
+    <div class="date">
+        <a href="{{ include.post.url | prepend: site.baseurl }}">{% include date_formatter.html date=include.post.date format="post_element_display" %}</a>
+    </div>
+    <div class="post-body">
+        <div class="title">
+            <a class="label" href="{{ include.post.url | prepend: site.baseurl }}">{{ include.post.title }}</a>
+            {% if site.show_categories %}<span class="categories">{% include post_categories.html post=include.post splitter=", " starter="- " %}</span>{% endif %}
+            {% if site.show_reading_time %}&nbsp;(&nbsp;<span class="font-icon icon-clock"></span>&nbsp;{% include read_time.html content=include.post.content  %}&nbsp;){% endif %}
+        </div>
+        <div class="summary">
+            {% if include.post.summary %}
+            {{ include.post.summary }}
+            {% else %}
+            {{ include.post.content | strip_html | truncatewords: 50 }}
+            {% endif %}
+            {% if include.post.tags.size > 0 %}
+                <div class="tags">{% include post_tags.html post=include.post %}</div>
+            {% endif %}
+        </div>
+    </div>
+    {% if include.post.thumbnail %}
+    <div class="post-thumbnail">
+        <img src="/images/posts/{{include.post.thumbnail}}" alt="{{ include.post.title }}" />
+    </div>
+    {% endif %}
+</div>

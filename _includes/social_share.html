@@ -1,0 +1,17 @@
+{% assign title = page.title | default: site.title[page.lang] %}
+{% assign postUrl = page.shortenUrl | default: page.url | absolute_url %}
+{% assign description = page.summary  | markdownify | strip_html | strip_newlines | normalize_whitespace | truncate: 160 | escape_once | default: title %}
+{% assign remainingTwitterNbChars=site.twitter.maxpostlength | minus:site.twitter.linklength | minus:site.twitter.username.size | minus:8  %}
+{% capture tweeterLinkUrl %}https://twitter.com/intent/tweet?original_referer={{site.url | cgi_escape}}&ref_src=twsrc%5Etfw&tw_p=tweetbutton&via={{site.twitter.username}}&url={{postUrl | cgi_escape}}&text={{title | truncate: remainingTwitterNbChars | cgi_escape}}{% endcapture %}
+{% capture linkedinLinkUrl %}https://www.linkedin.com/sharing/share-offsite?mini=true&ro=false&url={{postUrl | cgi_escape}}&title={{title | cgi_escape}}&summary={{description}}{% endcapture %}
+{% capture facebookLinkUrl %}https://www.facebook.com/sharer/sharer.php?u={{postUrl | cgi_escape}}{% endcapture %}
+{% capture googleLinkUrl %}https://plus.google.com/share?url={{postUrl | cgi_escape}}{% endcapture %}
+<div class="share-links">
+    <span>
+        {{site.data.translations["share_this_post_on"][page.lang] | capitalize }}
+        <a href="{{tweeterLinkUrl}}" target="_blank" title="{{site.data.translations["share_this_post_on"][page.lang] | capitalize }} Twitter"><span class="font-icon icon-twitter-squared"></span></a>
+        <a href="{{linkedinLinkUrl}}" target="_blank" title="{{site.data.translations["share_this_post_on"][page.lang] | capitalize }} LinkedIn"><span class="font-icon icon-linkedin"></span></a>
+        <a href="{{facebookLinkUrl}}" target="_blank" title="{{site.data.translations["share_this_post_on"][page.lang] | capitalize }} Facebook"><span class="font-icon icon-facebook"></span></a>
+        <a href="{{googleLinkUrl}}" target="_blank" title="{{site.data.translations["share_this_post_on"][page.lang] | capitalize }} Google+"><span class="font-icon icon-google-squared"></span></a>
+    </span>
+</div>

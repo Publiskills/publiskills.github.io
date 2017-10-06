@@ -1,0 +1,7 @@
+{% if page.collection != "my_pages" %}
+{% if page.collection%}{% assign pages_src = site[page.collection] %}{% else %}{% assign pages_src = site.pages %}{% endif %}
+{% for current_lang in site.langs %}
+{% assign translated_page = pages_src | where: 'ref', page.ref | where: "lang", current_lang | first %}
+{% if translated_page %}<link rel="alternate" hreflang="{{current_lang}}" href="{{ translated_page.url | absolute_url }}" />{% endif %}
+{% endfor %}
+{% endif %}

@@ -1,0 +1,25 @@
+<div id="menu">
+    <div class="main-width">
+        <div class="side-menu-container">
+            <div class="side-menu">
+                <div class="menu-content">
+                    <div class="profile">
+                        <img src="/images/portrait.jpg" alt="{{ site.author }}">
+                        <span>{{ site.author }}</span>
+                    </div>
+                    <div class="menu-items">
+                        <a href="{% if page.lang %}{{site.sub_urls_by_lang[page.lang]}}{% endif %}" title="{{site.data.translations["home"][page.lang] | capitalize}}">{{site.data.translations["home"][page.lang] | capitalize}}</a>
+                        <a href="{% if page.lang %}{{site.sub_urls_by_lang[page.lang]}}{% endif %}" title="Posts">Posts</a>
+                        <a href="https://fr.linkedin.com/in/{{ site.linkedin.username }}" title="{{site.data.translations["about"][page.lang] | capitalize}}" target="_blank">{{site.data.translations["about"][page.lang] | capitalize}}</a>
+                    </div>
+                </div>
+                <div class="social-links">
+                    {% include social_links.html %}
+                </div>
+                <a id="menu-closebtn" href="#">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

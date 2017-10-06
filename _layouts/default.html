@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--[if IE]>
+    <html lang="{{ page.lang | default: site.lang | default: "en" }}" class="no-js ie" dir="ltr">
+<![endif]-->
+<!--[if !IE]>-->
+    <html lang="{{ page.lang | default: site.lang | default: "en" }}" class="no-js" dir="ltr">
+<!--<![endif]-->
+  {% include head.html %}
+  <body>
+    <div id="overlay-mask"></div>
+    <div id="main-wrapper">
+      <div id="header">
+        {% include header.html %}
+      </div>
+      <div id="main-content">
+      {% include banner.html %}
+      {% include lang_nav.html %}
+      {{ content }}
+      </div>
+      {% include footer.html %}
+    </div>
+    {% include menu.html %}
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/vendor/what-input.js"></script>
+    <script src="/js/vendor/foundation.js"></script>
+    <script src="/js/classList.js"></script>
+    <script src="/js/publiskills.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+
+</html>

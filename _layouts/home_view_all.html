@@ -1,0 +1,15 @@
+---
+layout: default
+---
+{% assign posts_by_language = site.posts | where: "lang", page.lang %}
+<div class="main-content post-list">
+    {% if posts_by_language.size > 0 %}
+        {% for post in posts_by_language %}
+            {% include post_element_display.html post=post %}
+        {% endfor %}
+    {% else %}
+        <div class="post no-post">x
+            {{site.data.translations["no_posts"][page.lang] | capitalize}}
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,4 @@
+{% assign first = true %}
+{% if include.post.tags.size > 0 %}
+    {% for post_tag in include.post.tags %}{% assign tag = site.my_tags | where: "ref", post_tag | where: "lang", page.lang | first %}{% if tag %}{% if first == true %}{{ include.starter }}{% else %}{{ include.splitter }}{% endif %}<a href="{{tag.url}}">{% if include.add-icon-tag %}<span class="font-icon icon-tag"></span>{% endif %}{{ tag.name | capitalize }}</a>{% assign first = false %}{% endif %}{% endfor %}
+{% endif %}

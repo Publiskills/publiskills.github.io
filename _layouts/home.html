@@ -1,0 +1,18 @@
+---
+layout: default
+---
+{% assign posts_list = site.posts | where:"lang",page.lang %}
+<div class="main-content post-list">
+  {% assign nb_to_pop = posts_list.size | minus: site.nb_posts_per_page %}
+  {% if nb_to_pop > 0 %}{% assign posts_src= posts_list | pop: nb_to_pop %}{% else %}{% assign posts_src= posts_list %}{% endif %}
+  {% if posts_src.size > 0 %}
+    {% for post in posts_src %}
+      {% include post_element_display.html post=post %}
+    {% endfor %}
+  {% else %}
+    <div class="post no-post">
+      {{site.data.translations["no_posts"][page.lang] | capitalize}}
+    </div>
+  {% endif %}
+</div>
+{% include pagination_ctrl.html elements=posts_list current_pos=1 lang=page.lang %}

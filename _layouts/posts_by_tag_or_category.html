@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{% if page.collection == "my_tags" %}
+    {% assign posts_list=site.tags[page.ref] | where: "lang",page.lang %}
+    {% assign display_type=site.data.translations["with_the_tag"][page.lang] %}
+{% else %}
+    {% assign posts_list=site.categories[page.ref] | where: "lang",page.lang %}
+    {% assign display_type=site.data.translations["with_the_category"][page.lang] %}
+{% endif %}
+<div class="tag-title">
+    {{site.data.translations["posts_associated"][page.lang] | capitalize}} {{display_type}} "<span>{{page.name}}</span>"
+</div>
+
+<div class="main-content post-list">
+    {% if posts_list.size > 0 %}
+        {% for post in posts_list %}
+            {% include post_element_display.html post=post %}
+        {% endfor %}
+    {% else %}
+        <div class="post no-post">
+            {{site.data.translations["no_posts"][page.lang] | capitalize}}
+        </div>
+    {% endif %}
+</div>

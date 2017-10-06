@@ -1,0 +1,4 @@
+{% assign first = true %}
+{% if include.post.categories.size > 0 %}
+    <span class="inner-categories">{% for post_cat in include.post.categories %}{% assign cat = site.my_categories | where: "ref", post_cat | where: "lang", page.lang | first %}{% if cat %}{% if first == true %}{{ include.starter }}{% else %}{{ include.splitter }}{% endif %}<a href="{{cat.url}}">{{ cat.name | capitalize }}</a>{% assign first = false %}{% endif %}{% endfor %}</span>
+{% endif %}

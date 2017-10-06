@@ -1,0 +1,30 @@
+<entry{% if post.lang %} xml:lang="{{ post.lang }}"{% endif %}>
+    <title type="html">{% if include.post.title and include.post.title != "$$site_title$$" %}{{include.post.title | smartify | strip_html | normalize_whitespace | xml_escape}}{% else %}{{ site.data.translations["site_title"][include.post.lang]}}{% endif %}</title>
+    <link>{{include.post.canonical_url | default: (include.post.url | replace:'index.html','') | absolute_url}}</link>
+    <published>{{ include.post.date | date_to_xmlschema }}</published>
+    <updated>{{ include.post.date | date_to_xmlschema }}</updated>
+    <id>{{include.post.canonical_url | default: (include.post.url | replace:'index.html','') | absolute_url}}</id>
+    <content type="html" xml:base="{{ post.url | absolute_url | xml_escape }}">{{ post.content | strip | xml_escape }}</content>
+    <author>
+        <name>{{ include.post.author | default: site.author }}</name>
+    </author>
+    <summary>{{ include.post.summary  | markdownify | strip_html | strip_newlines | normalize_whitespace | truncate: 160 | escape_once | default: include.post.title }}</summary>
+    {% assign post_image = include.post.big-thumb | default: include.post.thumbnail %}
+    {% if post_image %}
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ post_image }}" />
+    {% endif %}
+    {% assign tags = site.data.translations["additional_tags"][include.post.lang] %}{% if include.post.seo_tags %}{% assign tags = tags | concat: include.post.seo_tags %}{% endif %}{% if include.post.tags %}{% assign tags = tags | concat: include.post.tags %}{% endif %}
+    {% assign tags = tags | uniq %}
+    {% if include.post.categories.size > 0 %}
+    {% for page_cat in include.post.categories %}
+    {% assign cat = site.my_categories | where: "ref", page_cat | where: "lang", include.post.lang | first %}
+    {% if cat %}<category term="{{ cat.name }}" />{% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if tags.size > 0 %}
+    {% for page_tag in tags %}
+    {% assign tag = site.my_tags | where: "ref", page_tag | where: "lang", include.post.lang | first %}
+    {% if tag %}<category term="{{ tag.name }}" />{% endif %}
+    {% endfor %}
+    {% endif %}
+</entry>

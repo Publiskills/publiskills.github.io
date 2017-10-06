@@ -1,0 +1,14 @@
+<footer>
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-title">
+                <span>
+                    {{ site.site_name }} {{site.data.translations["by"][page.lang]}} <a href="https://fr.linkedin.com/in/{{ site.linkedin.username }}" target="_blank">{{ site.author }}</a>
+                </span>
+            </div>
+            <div class="social-links">
+                {% include social_links.html %}
+            </div>
+        </div>
+    </div>
+</footer>

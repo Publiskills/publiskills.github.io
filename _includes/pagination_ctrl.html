@@ -1,0 +1,28 @@
+{% assign nb_pages = include.elements.size | divided_by: site.nb_posts_per_page %}
+{% assign nb_pages_modulo = include.elements.size | modulo: site.nb_posts_per_page %}
+{% if nb_pages_modulo > 0 %}{% assign nb_pages = nb_pages | plus: 1 %}{% endif %}
+{% if nb_pages > 1 %}
+<div class="pagination">
+    <div class="pagination-container">
+        <div class="previous">
+            {% if include.current_pos > 1 %}
+                {% if include.current_pos == 2 %}
+                    {% assign previous_url = site.sub_urls_by_lang[include.lang] %}
+                {% else %}
+                    {% capture previous_url %}/page{{ site.sub_urls_by_lang[include.lang] }}{{ include.current_pos | minus:1 }}{% endcapture %}
+                {% endif %}
+                <a href="{{ previous_url }}"><< {{site.data.translations["newer_posts"][page.lang] | capitalize }}</a>
+            {% endif %}
+        </div>
+        <div class="current">
+            {{ include.current_pos }} / {{ nb_pages }}
+        </div>
+        <div class="next">
+            {% if include.current_pos < nb_pages %}
+                {% capture next_url %}/page{{ site.sub_urls_by_lang[include.lang] }}{{ include.current_pos | plus:1 }}{% endcapture %}
+                <a href="{{ next_url }}">{{site.data.translations["older_posts"][page.lang] | capitalize }} >></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,27 @@
+<div class="lang-nav">
+{% if site.langs.size > 1 %}{% if page.collection == "my_pages" %}
+    {% for current_lang in site.langs %}
+        {{splitter}}
+        {% if page.lang == current_lang %}
+            <span>{{current_lang}}</span>
+        {% else %}
+            <a href="{{site.sub_urls_by_lang[current_lang]}}">{{current_lang}}</a>
+        {% endif %}
+        {% assign splitter= " | " %}
+    {% endfor %}
+{% else %}
+    {% if page.collection%}{% assign pages_src = site[page.collection] %}{% else %}{% assign pages_src = site.pages %}{% endif %}
+    {% for current_lang in site.langs %}
+        {{splitter}}
+        {% assign translated_page = pages_src | where: 'ref', page.ref | where: "lang", current_lang | first %}
+        {% if page.lang == current_lang %}
+            <span>{{current_lang}}</span>
+        {% elsif translated_page %}
+            <a href="{{translated_page.url}}">{{current_lang}}</a>
+        {% else %}
+            <a href="{{site.sub_urls_by_lang[current_lang]}}">{{current_lang}}</a>
+        {% endif %}
+        {% assign splitter= " | " %}
+    {% endfor %}
+{% endif %}{% endif %}
+</div>

@@ -1,0 +1,65 @@
+description:
+  fr: Publiskills - Il est temps de coder !
+  en: Publiskills - Let's see some code !
+
+ribbon_txt:
+  fr: Il est temps de coder !
+  en: Let's see some code !
+
+site_title:
+  fr: Publiskills - Il est temps de coder !
+  en: Publiskills - Let's see some code !
+
+home:
+  fr: accueil
+  en: home
+
+about:
+  fr: à propos
+  en: about
+
+share_this_post_on:
+  fr: partagez ce post sur
+  en: share this post on
+
+no_posts:
+  fr: aucun post pour le moment !
+  en: no posts yet !
+
+by:
+  fr: par
+  en: by
+
+older_posts:
+  fr: posts plus anciens
+  en: older posts
+
+newer_posts:
+  fr: posts plus récents
+  en: newer posts
+
+posts_associated:
+  fr: posts associés
+  en: posts associated
+
+with_the_tag:
+  fr: au tag
+  en: with the tag
+
+with_the_category:
+  fr: à la catégorie
+  en: with the category
+
+disqus_no_script:
+  fr: Veuillez activer JavaScript pour voir les <a href="https://disqus.com/?ref_noscript" rel="nofollow">commentaires.</a>
+  en: Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments.</a>
+
+additional_tags:
+  fr:
+    - publiskills
+    - fabien
+    - wirig
+  en:
+    - publiskills
+    - fabien
+    - wirig

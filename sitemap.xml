@@ -1,0 +1,38 @@
+---
+ref: sitemaps
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    {% assign post_refs = site.posts | group_by: "ref" %}
+    {% for ref in post_refs %}{% assign is_first = true %}{% for current_lang in site.langs %}{% assign version = ref.items | where: "lang", current_lang | first %}{% if version %}
+    {% if is_first %}<url>
+        <loc>{{ version.url | absolute_url }}</loc>
+        <lastmod>{{ version.date | date_to_xmlschema }}</lastmod>
+        <changefreq>weekly</changefreq>
+    {% endif %}    <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="{{ version.url | absolute_url}}" />{% assign is_first = false %}
+    {% endif %}{% endfor %}{% unless is_first %}</url>{% endunless %}{% endfor %}
+    {% assign post_refs = site.pages | group_by: "ref" %}
+    {% for ref in post_refs %}{% if ref.name.size > 0 and ref.name != "404" and ref.name != "robots" and ref.name != page.ref %}{% assign is_first = true %}{% for current_lang in site.langs %}{% assign version = ref.items | where: "lang", current_lang | first %}{% if version %}
+    {% if is_first %}<url>
+        <loc>{{ version.url | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        <changefreq>weekly</changefreq>
+    {% endif %}    <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="{{ version.url | absolute_url}}" />{% assign is_first = false %}
+    {% endif %}{% endfor %}{% unless is_first %}</url>{% endunless %}{% endif %}{% endfor %}
+    {% assign post_refs = site.my_tags | group_by: "ref" %}
+    {% for ref in post_refs %}{% assign is_first = true %}{% for current_lang in site.langs %}{% assign version = ref.items | where: "lang", current_lang | first %}{% if version %}
+    {% if is_first %}<url>
+        <loc>{{ version.url | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        <changefreq>weekly</changefreq>
+    {% endif %}    <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="{{ version.url | absolute_url}}" />{% assign is_first = false %}
+    {% endif %}{% endfor %}{% unless is_first %}</url>{% endunless %}{% endfor %}
+    {% assign post_refs = site.my_categories | group_by: "ref" %}
+    {% for ref in post_refs %}{% assign is_first = true %}{% for current_lang in site.langs %}{% assign version = ref.items | where: "lang", current_lang | first %}{% if version %}
+    {% if is_first %}<url>
+        <loc>{{ version.url | absolute_url }}</loc>
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        <changefreq>weekly</changefreq>
+    {% endif %}    <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="{{ version.url | absolute_url}}" />{% assign is_first = false %}
+    {% endif %}{% endfor %}{% unless is_first %}</url>{% endunless %}{% endfor %}
+</urlset>

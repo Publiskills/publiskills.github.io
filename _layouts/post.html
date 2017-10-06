@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<div class="main-content">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    {% if site.show_categories %}{% include post_categories.html post=page splitter=", " %}{% endif %}
+    {% if page.big-thumb %}
+    <div class="post-big-thumb">
+      <img src="/images/posts/{{ page.big-thumb }}" alt="{{ page.title | escape }}"/>
+    </div>
+    {% endif %}
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>{% if site.show_reading_time %} (&nbsp;<span class="font-icon icon-clock"></span>&nbsp;{% include read_time.html %}&nbsp;) {% endif %}
+      <div class="sub-title">
+        <div class="sub-title-container">
+          <p class="post-meta">
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</span></span> -
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+              {% include date_formatter.html date=page.date format="post" %}
+            </time></p>
+          <p class="post-tags tags">
+            {% include post_tags.html post=page splitter=" - " add-icon-tag=true %}
+          </p>
+        </div>
+
+      </div>
+    </header>
+    <div class="post-content" itemprop="articleBody">
+      {% include social_share.html %}
+      {{ content }}
+      {% include social_share.html %}
+    </div>
+
+  </article>
+</div>
+
+{% include disqus_comments.html %}
