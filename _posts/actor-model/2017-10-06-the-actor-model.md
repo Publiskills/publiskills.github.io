@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "The actor model"
-date:   2017-09-11 07:53:12 +0200
+date:   2017-10-06 06:53:12 +0200
 ref: actor-model
 lang: en
 summary: "summary actor model"
