@@ -19,7 +19,7 @@ layout: default
     {% include pagination_ctrl.html elements=posts_list current_pos=page.pos lang=page.lang %}
 {% else %}
 <script>
-    window.location = "{{site.sub_urls_by_lang[page.lang]}}404.html";
+    window.location = "{{site.sub_urls_by_lang[page.lang]}}404";
 </script>
 <noscript>
     <div class="post no-post">
