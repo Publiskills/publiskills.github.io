@@ -3,7 +3,7 @@ layout: post
 title:  "Les systèmes réactifs et le pattern actor model"
 date:   2017-10-06 06:53:12 +0200
 ref: actor-model
-summary: "Cet article est le premier d'une série traitant du pattern actor model et des différentes solutions actuellement disponibles pour implémenter des systèmes s'appuyant sur ce passionant modèle de conception.<br /><br />Nous y verrons les principes fondamentaux de ce pattern et illustrerons ces concepts en amalysant un exemple de système d'acteurs complet."
+summary: "Cet article est le premier d'une série traitant du pattern actor model et des différentes solutions actuellement disponibles pour implémenter des systèmes s'appuyant sur ce passionant modèle de conception.<br /><br />Nous y verrons les principes fondamentaux de ce pattern et illustrerons ces concepts en analysant un exemple de système d'acteurs complet."
 thumbnail: "actor-model/mini-thumbnail.jpg"
 big-thumb: "actor-model/intro-image.jpg"
 tags: actor-model
