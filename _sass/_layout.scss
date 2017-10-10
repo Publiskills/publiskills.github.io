@@ -262,6 +262,10 @@ footer {
   }
 }
 
+.not-displayed {
+  display:none;
+}
+
 .main-content {
   @extend .box-shadow;
   @extend .grid-container;

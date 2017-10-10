@@ -6,9 +6,21 @@ layout: default
     {% if site.show_categories %}{% include post_categories.html post=page splitter=", " %}{% endif %}
     {% if page.big-thumb %}
     <div class="post-big-thumb">
-      <img src="/images/posts/{{ page.big-thumb }}" alt="{{ page.title | escape }}"/>
+      <img itemprop="image" src="/images/posts/{{ page.big-thumb }}" alt="{{ page.title | escape }}"/>
     </div>
-    {% endif %}
+    {% else %}<img itemprop="image" class="not-displayed" src="/images/{{site.logo}}" alt="{{ page.title | escape }}"/>{% endif %}
+    <div itemprop="publisher" class="not-displayed" itemscope id="organization" itemtype="https://schema.org/Organization">
+      <a itemprop="url" href="{{site.url}}">
+        <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+           <img itemprop="url" src="/images/{{site.logo}}" alt="{{site.site_name}} logo">
+           <meta itemprop="width" content="192">
+           <meta itemprop="height" content="192">
+        </span>
+        <span itemprop="name">{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</span>
+        <span itemprop="description">{{site.site_name}}</span>
+      </a>
+    </div>
+    <a itemprop="mainEntityOfPage" class="not-displayed" href="{{ page.url | absolute_url }}"><h1 itemprop="name">{{ page.title }}</h1></a>
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>{% if site.show_reading_time %} (&nbsp;<span class="font-icon icon-clock"></span>&nbsp;{% include read_time.html %}&nbsp;) {% endif %}
       <div class="sub-title">
@@ -17,7 +29,7 @@ layout: default
             <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</span></span> -
             <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
               {% include date_formatter.html date=page.date format="post" %}
-            </time></p>
+            </time><time datetime="{{ page.date-modified | default: site.time | date_to_xmlschema }}" class="not-displayed" itemprop="dateModified"></time></p>
           <p class="post-tags tags">
             {% include post_tags.html post=page splitter=" - " add-icon-tag=true %}
           </p>
