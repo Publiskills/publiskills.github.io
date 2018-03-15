@@ -26,30 +26,30 @@ Le besoin de changer de conception est né de la divergence de l’évolution de
 
 ### - Les sollicitations et les exigences des utilisateurs
 
-![Increasing](/images/posts/actor-model/increase.jpg){: .inline-left-image}
+![Increasing](/images/posts/actor-model/actor-model-increase.png){: .inline-left-image}
 - Le nombre d’accès concurrents (utilisateurs) a explosé au cours des dernières années.
 - La volumétrie des données gérées et stockées a augmenté.
-- Les exigences des utilisateurs en termes de réactivité ne sont plus les mêmes.
+- Les exigences des utilisateurs en matière de réactivité ne sont plus les mêmes.
 
-### - Les coûts et la compléxité de gestion de l’infrastructure
+### - Les coûts et la complexité de gestion de l’infrastructure
 {: .clear}
 
-![Decreasing](/images/posts/actor-model/decrease.jpg){: .inline-left-image}
+![Decreasing](/images/posts/actor-model/actor-model-decrease.png){: .inline-left-image}
 - Les coûts de l’infrastructure ont drastiquement diminué (RAM, stockage, puissance de calcul…).
-- Les temps de latences des communications réseau se comptent désormais en millisecondes.
+- Les temps de latence des communications réseau se comptent désormais en millisecondes.
 - La complexité de scalabilité des plateformes a été réduite au minimum (IAAS, PAAS).
 
-Ces évolutions nous ont amenés à repenser les architectures sur lesquelles sont basés nos solutions informatiques actuelles. L’approche réactive se veut très pragmatique, elle définit un ensemble de quatre critères qui doivent être remplis pour pouvoir qualifier un système comme « réactif ».
+Ces évolutions nous ont amenés à repenser les architectures sur lesquelles sont basées nos solutions informatiques actuelles. L’approche réactive se veut très pragmatique, elle définit un ensemble de quatre critères qui doivent être remplis pour pouvoir qualifier un système comme «&nbsp;réactif&nbsp;».
 {: .clear}
 
 ## Le reactive manifesto
 
-Un système dit « réactif » doit donc répondre aux 4 critères suivants :
+Fort de ces constats, le reactive manifesto définit une approche cohérente afin de tirer profit de ces changements. Selon ce manifeste, un système dit «&nbsp;réactif&nbsp;» doit donc répondre aux 4 critères suivants :
 
 ### 1. Disponible (Responsive) &#8680; *assure la réactivité à la sollicitation sous toute condition*
 
 ![Responsive](/images/posts/actor-model/responsive.jpg){: .inline-left-image}
-Le système répond rapidement et de façon constante, dans la mesure du possible, en toutes circonstances. La rapidité et la constance du service fournit par le système est ce qui en assure sa pérennité. Cette disponibilité est assurée par les trois autres caractéristiques d’un système réactif.
+Le système répond rapidement et de façon constante, dans la mesure du possible, en toutes circonstances. La rapidité et la constance du service fournit par le système en assurent sa pérennité. Cette disponibilité est assurée par les trois autres caractéristiques d’un système réactif.
 
 ### 2. Résilient (Resilient) &#8680; *assure la réactivité face aux erreurs*
 
@@ -59,7 +59,7 @@ La disponibilité du système reste assurée en cas d’erreur au sein d’un de
 ### 3. Souple (Elastic) &#8680; *assure la réactivité face à la charge*
 
 ![Elastic](/images/posts/actor-model/elastic.jpg){: .inline-left-image}
-Le système répond rapidement quelle que soit la charge de travail. Il doit être évolutif (scalable) et pouvoir s’adapter aux contextes changeants. Cette « élasticité » est rendue possible par la nature « orientée message » du système qui permet facilement une redistribution des messages.
+Le système répond rapidement quelle que soit la charge de travail. Il doit être évolutif (scalable) et doit pouvoir s’adapter aux contextes changeants. Cette « élasticité » est rendue possible par la nature « orientée message » du système, qui permet facilement une redistribution des messages.
 
 ### 4. Orienté message (Message driven) &#8680; *assure la réactivité face aux évènements*
 
@@ -71,7 +71,7 @@ Les échanges entre les composants se font par l’échange de messages asynchro
 
 N’hésitez pas à aller consulter (et signer !) [le reactive manifesto](http://www.reactivemanifesto.org){:target="_blank"} pour de plus amples informations.
 
-# L'actor model (modèle d’acteur)
+# Le pattern actor model (modèle d’acteur)
 
 ## Un  peu d'histoire
 
@@ -81,17 +81,19 @@ Cette conceptualisation présupposait que le modèle s'exécute dans un réseau 
 
 De telles performances n'étaient pas disponibles alors, mais les choses ont bien changé depuis.
 
-## Les concepts de l'actor model
+## Les concepts du pattern actor model
 
 *"En informatique, le modèle d'acteur est un modèle mathématique qui considère des acteurs comme les seules fonctions primitives nécessaires pour la programmation concurrente. Les acteurs communiquent par échange de messages."* ([Wikipedia](https://fr.wikipedia.org/wiki/Mod%C3%A8le_d%27acteur){:target="_blank"})
 
-Un acteur interagit indirectement avec d’autres acteurs en envoyant des messages à leurs adresses, dont il a sauvegardé les références, sans se soucier de leurs états ou de leurs localisations (processus, machine, …).
+Un acteur interagit indirectement avec d’autres acteurs en envoyant des messages à leurs adresses, dont il a sauvegardé les références, sans se soucier de leurs états ou de leurs localisations (processus, machine …).
 
 Plusieurs adresses peuvent pointer sur un même acteur alors qu'une adresse peut représenter plusieurs acteurs.
 
 Un acteur dispose d’une file d’attente (mailbox) pour les messages qu’il reçoit. Il traite ces derniers **un par un** et ne fait donc qu’**un seul traitement à la fois**.
 
-Il n'y a **aucune mémoire partagée** entre différents acteurs. Les acteurs ne communiquent pas en partageant de la mémoire, mais **ils partagent de la mémoire en communiquant**.
+Il n'y a **aucune mémoire partagée** entre les différents acteurs. Les acteurs ne communiquent pas en partageant de la mémoire, mais **ils partagent de la mémoire en communiquant**.
+
+Un acteur trouve donc sa raison d’être dans ses interactions avec les autres acteurs. Un acteur n’est jamais seul, il appartient à un système. **“One ant is no ant.”** (Edward O. Wilson)
 
 >![Actions possibles](/images/posts/actor-model/actor-actions.gif){: .inline-right-image .bordered-image}
 >Lors du traitement d’un message, un acteur peut seulement exécuter une ou plusieurs des actions suivantes :
@@ -108,22 +110,22 @@ Un acteur dispose donc d'un nombre limité d'actions possibles lors du traitemen
 >- Une file d’attente de messages qu'il traite un par un
 >- Un protocole de communication avec d’autres acteurs
 
-### Analogies entre actor model et programmation orientée objet (POO)
+### Analogies entre le pattern actor model et la programmation orientée objet (POO)
 
 Ce modèle considère que « tout est acteur ». Cette approche est similaire à l’approche du « tout est objet » de la POO, mais à des niveaux d’abstraction et d’isolation supérieurs.
 
 Nous pouvons également remarquer les analogies suivantes entre Actor model et POO:
 
-|                               | Actor model                       | POO                               |
+|                               | Pattern actor model               | POO                               |
 | ----------------------------- | --------------------------------- | --------------------------------- |
 | *Philosophie*                 | Tout est acteur	                | Tout est objet                    |
-| *Accès à une entité*	        | Adresse(s) de l'acteur	        | Référence(s) de l’objet           |
+| *Accès à une entité*	        | Adresse(s) de l'acteur	        | Instance(s) de l’objet            |
 | *Interactions entre entités*	| Envoi de message (non bloquant)	| Invocation de méthode (bloquant)  |
 | *Gestion des interactions*	| File d’attente de messages	    | Pile d’appel                      |
 | *Gestion de la concurrence*	| Intrinsèque	                    | Possible mais très vite complexe  |
 {: .centered-table}
 
->L'actor model permet de créer facilement des architectures réactives. De par sa nature intrinsèquement découplée et nativement orientée message, il permet de concevoir des systèmes résilients et aisément scalables.
+>Le pattern actor permet de créer aisément des architectures réactives. De par sa nature intrinsèquement découplée et nativement orientée message, il permet de concevoir des systèmes résilients et aisément scalables.
 
 ## Présentation d'un système d'acteurs complet
 
@@ -142,7 +144,7 @@ Trois grandes actions sont réalisées par ce système :
 - Génération des miniatures
 - Agrégation d'informations liées à l'image
 
-Les messages d'upload d'image "ImageUploaded" sont réceptionnés par l'acteur *ImageReceiver* qui se charge de transmettre de nouveaux messages à destination des acteurs suivants (*ExplicitContentDetector*, *ThumbnailGenerator/ImageFileDispatcher* et *ImagePreprocessor*).
+Les messages d'upload d'image "ImageUploaded" sont réceptionnés par l'acteur *ImageReceiver*, qui se charge de transmettre de nouveaux messages à destination des acteurs suivants (*ExplicitContentDetector*, *ThumbnailGenerator/ImageFileDispatcher* et *ImagePreprocessor*).
 
 Ces trois messages déclenchent donc les trois sous-tâches suivantes en parallèle.
 
@@ -161,13 +163,13 @@ Lorsque l'acteur *ImageFileDispatcher* reçoit un message (peu importe la proven
 
 ### Agrégation d'informations liées à l'image
 
-Cette partie du système, en charge de la recherche d'informations, constituée des acteurs *ImagePreprocessor*, *ImageFilter*, *ContentEnricher*, *FaceDetector*, *UserDataProvider*, *ImageDuplicateFinder* et *DataAggregator*.
+Cette partie du système, est en charge de la recherche d'informations, constituée des acteurs *ImagePreprocessor*, *ImageFilter*, *ContentEnricher*, *FaceDetector*, *UserDataProvider*, *ImageDuplicateFinder* et *DataAggregator*.
 
 En tout premier lieu, un prétraitement de l'image est effectué en amont par les acteurs *ImagePreprocessor* et *ImageFilter* pour faciliter l'analyse de l'image.
 
 ![Détection d'utilisateurs](/images/posts/actor-model/face-detection.jpg){: .inline-right-image .bordered-image}
 
-Une partie du système prend en charge la détection d'utilisateurs dans les images (*FaceDetector*) et l'ajout de leurs informations associées (*UserDataProvider*).
+Une partie du système prend en charge la détection d'utilisateurs dans les images (*FaceDetector*), et l'ajout de leurs informations associées (*UserDataProvider*).
 
 Il est intéressant de noter que l'acteur *FaceDetector* est en réalité exécuté sur plusieurs instances. Il est créé à la volée par le *ContentEnricher* afin d'exécuter cette tâche longue et bloquante (une seule action à la fois) sans impacter le reste du système. Il est ensuite détruit une fois son action terminée.
 
@@ -175,13 +177,13 @@ L'autre partie prend en charge la détection des doublons d'image au sein de l'e
 
 ### Transmission du résultat de l'analyse
 
-L'ensemble des données récoltées par l'analyse est enfin rattaché à la miniature (*DataAggregator* et *EnrichedImageFileDispatcher*) généré en parallèle par la partie *Géneration des miniatures*.
+Enfin, l’ensemble des données récoltées par l'analyse est enfin rattaché à la miniature (*DataAggregator* et *EnrichedImageFileDispatcher*) généré en parallèle par la partie *Géneration des miniatures*.
 
 Un message "EnrichedImageValidated" est alors publié vers l'extérieur du système pour notifier celui-ci de la fin du traitement d'une image uploadée.
 
-## L'actor model démystifié par son concepteur en personne
+## Le pattern actor démystifié par son concepteur en personne
 
-Je vous laisse regarder cette excellente vidéo dans laquelle son concepteur, [Carl Hewitt](https://en.wikipedia.org/wiki/Carl_Hewitt){:target="_blank"}, nous présente l'actor model. Il y détaille les concepts fondamentaux et la philosophie du modèle (vidéo en anglais) :
+Je vous laisse regarder cette excellente vidéo dans laquelle son concepteur, [Carl Hewitt](https://en.wikipedia.org/wiki/Carl_Hewitt){:target="_blank"}, nous présente le pattern actor model. Il y détaille les concepts fondamentaux et la philosophie du modèle (vidéo en anglais) :
 
 <div class="youtube-wrapper"><div class="youtube-video"><iframe src="https://www.youtube.com/embed/7erJ1DV_Tlo" frameborder="0" allowfullscreen></iframe></div></div>
 
@@ -190,5 +192,3 @@ Je vous laisse regarder cette excellente vidéo dans laquelle son concepteur, [C
 Nous venons de voir en détail la théorie du pattern actor model. Dans un prochain article, je vous présenterai une des implémentations disponibles de ce pattern : Akka.Net.
 
 Nous y verrons comment mettre en place un système d'acteurs basique puis nous avancerons plus en détail, dans les articles suivants, pour explorer les possibilités et les différentes briques de ce framework (acteurs, testabilité, cluster, streams...).
-
-Nous verrons également au cours de cette série de posts sur l'actor model d'autres implémentations actuellement disponibles sur le marché (*Orleans*, *Azure Service Fabric - Reliable actors* ...).

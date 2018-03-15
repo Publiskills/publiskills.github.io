@@ -22,7 +22,7 @@ layout: default
     </div>
     <a itemprop="mainEntityOfPage" class="not-displayed" href="{{ page.url | absolute_url }}"><h1 itemprop="name">{{ page.title }}</h1></a>
     <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>{% if site.show_reading_time %} (&nbsp;<span class="font-icon icon-clock"></span>&nbsp;{% include read_time.html %}&nbsp;) {% endif %}
+      <h1 class="post-title" itemprop="headline">{{ page.title | escape }}</h1>{% if site.show_reading_time %} (&nbsp;<span class="font-icon icon-clock"></span>&nbsp;{% include read_time.html %}&nbsp;) {% endif %}
       <div class="sub-title">
         <div class="sub-title-container">
           <p class="post-meta">
