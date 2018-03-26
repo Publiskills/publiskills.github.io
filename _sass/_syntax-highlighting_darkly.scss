@@ -4,7 +4,7 @@
   -moz-border-radius: 0.3rem;
   -webkit-border-radius: 0.3rem;
   border-radius: 0.3rem;
-  padding: 0 0.5rem;
+  padding: 0 1.5rem;
   background: #343642;
   color: #C1C2C3;
   margin: 1em 0;
@@ -12,8 +12,14 @@
     margin: 0 !important;
     td, th {
       border: none !important;
+      padding: 0.5rem 0 !important;
+      > pre {
+        padding: 0;
+        margin: 0;
+      }
     }
   }
+  .gutter { padding-left: 0 !important; padding-right: 1.5rem !important; }
   .lineno { border-right:1px solid #c1c2c3; padding-right:0.5rem;}
   .code { padding-left:1rem;}
   .hll { background-color: #ffc; }
