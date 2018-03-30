@@ -200,13 +200,13 @@ a3.<span class="nf">Forward</span>(messageReceived); <span class="c1"> // On tra
 La méthode <strong>Ask&lt;T&gt;</strong> est un appel qui permet d'envoyer un message et de rester bloqué en attendant une réponse. Cette méthode est à utiliser avec parcimonie car elle ralentit considérablement la consommation des messages.
 <div class="code-block highlight">
 <pre>
-actorRef.<span class="nf">Ask</span>&lt;<span class="kt">TypeDeRetour</span>&gt;(message); <span class="c1"> // A utiliser avec modération car il s'agit d'appels bloquants !</span>
+actorRef.<span class="nf">Ask</span>&lt;<span class="kt">TypeDeRetour</span>&gt;(message);<span class="c1"> // A utiliser avec modération car il s'agit d'appels bloquants !</span>
 </pre>
 </div>
 </li></ol>
 </div>
 <div class="table-cell-when-not-mobile">
-<img src="/images/posts/akka-net-init/actor-forward.png" style="max-width:none;" alt="Froward" class="inline-right-image"/>
+<img src="/images/posts/akka-net-init/actor-forward.png" style="max-width:none;" alt="Froward" class="inline-image"/>
 </div>
 </div>
 
@@ -332,7 +332,7 @@ Pour mieux comprendre, voici les étapes :
 <img src="/images/posts/akka-net-init/behaviour-stacks-1.png" alt="stacked behaviour 1" class="inline-image" style="margin:0;" /><img src="/images/posts/akka-net-init/behaviour-stacks-2.png" alt="stacked behaviour 2" class="inline-image" style="margin:0;"  /><img src="/images/posts/akka-net-init/behaviour-stacks-3.png" alt="stacked behaviour 3" class="inline-image" style="margin:0;"  />
 </div>
 
-## 3. Alors, *Become* ou *BecomeStacked/UnBecomeStacked* ?
+## 3. Alors, *Become* ou *BecomeStacked / UnBecomeStacked* ?
 
 Tout dépend de l'acteur que vous implémentez. *Become* n'est qu'une particularité de l'utilisation des méthodes *BecomeStacked* et *UnBecomeStacked*.
 
@@ -348,7 +348,7 @@ Le code source d'un projet illustrant tous ces principes est disponible à l'adr
 
 # On the next episode(s)...
 
-Nous venons de voir les bases de l'utilisation du framework <a href="https://getakka.net/" target="_blank">Akka.Net</a>. Celui-ci permet d'implémenter facilement une solution basée sur [le pattern actor model](/posts/2017/10/06/l-actor-model/){:target="_blank"} en se concentrant directement sur les comportements des acteurs et leur communication.
+Nous venons de voir les bases de l'utilisation du framework <a href="https://getakka.net/" target="_blank">Akka.Net</a>. Celui-ci permet d'implémenter facilement une solution basée sur [le pattern actor model    ](/posts/2017/10/06/l-actor-model/){:target="_blank"} en se concentrant directement sur les comportements des acteurs et leur communication.
 
 Le framework permet de définir les trois types d'actions que peut faire un acteur :
 – Créer de nouveaux acteurs via la méthode **ActorOf** et les **Props**
