@@ -206,7 +206,7 @@ actorRef.<span class="nf">Ask</span>&lt;<span class="kt">TypeDeRetour</span>&gt;
 </li></ol>
 </div>
 <div class="table-cell-when-not-mobile">
-<img src="/images/posts/akka-net-init/actor-forward.png" style="max-width:none;" alt="Froward" class="inline-image"/>
+<img src="/images/posts/akka-net-init/actor-forward.png" style="max-width:none;margin-left:1rem" alt="Froward" class="inline-image"/>
 </div>
 </div>
 
